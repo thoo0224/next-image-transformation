@@ -12,10 +12,8 @@ Bun.serve({
     async fetch(req) {
         const url = new URL(req.url);
         if (url.pathname === "/") {
-            return new Response(`<h3>Next Image Transformation v${version}</h3>More info <a href="https://github.com/coollabsio/next-image-transformation">https://github.com/coollabsio/next-image-transformation</a>.`, {
-                headers: {
-                    "Content-Type": "text/html",
-                },
+            return new Response(null, {
+                status: 404
             });
         }
 
@@ -23,7 +21,9 @@ Bun.serve({
             return new Response("OK");
         };
         if (url.pathname.startsWith("/image/")) return await resize(url);
-        return Response.redirect("https://github.com/coollabsio/next-image-transformation", 302);
+        return new Response(null, {
+            status: 404
+        });
     }
 });
 
